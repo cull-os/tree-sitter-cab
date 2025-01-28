@@ -1,38 +1,9 @@
-const operatorMap = {
-  "+": "addition",
-  "-": "subtraction",
-  "!": "not",
-  "?": "try",
-  ".": "select",
-  "++": "concat",
-  "*": "multiplication",
-  "/": "division",
-  "^": "power",
-  "//": "update",
-  "<=": "less_or_equal",
-  "<": "less",
-  ">=": "more_or_equal",
-  ">": "more",
-  ":": "construct",
-  "==": "equals",
-  "!=": "not_equals",
-  "&&": "and",
-  "||": "or",
-  "->": "implication",
-  "|>": "pipe",
-  null: "implicit_application",
-  "<|": "application",
-  "=>": "lambda",
-  ":=": "bind",
-  ",": "same",
-  ";": "sequence",
-};
-
 export default grammar({
   name: "cab",
 
   externals: ($) => [
     $.multiline_comment,
+    $.error_senitel,
   ],
 
   extras: ($) => [
@@ -109,7 +80,7 @@ export default grammar({
               field("expression", $.expression),
             ),
           ),
-          $[`prefix_operation_${operatorMap[operator]}`],
+          $[`prefix_operation_${operator}`],
         )
       )),
 
@@ -161,18 +132,13 @@ export default grammar({
           alias(
             (left > right ? prec.left : prec.right)(
               Math.max(left, right),
-              operator === null
-                ? seq(
-                  field("left_expression", $.expression),
-                  field("right_expression", $.expression),
-                )
-                : seq(
-                  field("left_expression", $.expression),
-                  field("operator", operator),
-                  field("right_expression", $.expression),
-                ),
+              seq(
+                field("left_expression", $.expression),
+                ...operator !== null ? [field("operator", operator)] : [],
+                field("right_expression", $.expression),
+              ),
             ),
-            $[`infix_operation_${operatorMap[operator]}`],
+            $[`infix_operation_${operator}`],
           )
         ),
       ),
@@ -191,7 +157,7 @@ export default grammar({
                 field("operator", operator),
               ),
             ),
-            $[`suffix_operation_${operatorMap[operator]}`],
+            $[`suffix_operation_${operator}`],
           )
         ),
       ),
