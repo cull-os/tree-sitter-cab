@@ -13,6 +13,8 @@ export default grammar({
 
   supertypes: ($) => [$.expression],
 
+  word: ($) => $._identifier_simple,
+
   rules: {
     source_code: ($) => $.expression,
 
@@ -178,16 +180,21 @@ export default grammar({
         )),
       ),
 
+    _identifier_simple: ($) => /[\p{L}_-][\p{L}\p{N}_'-]*/,
+
     identifier: ($) =>
       choice(
-        /[\p{L}_-][\p{L}\p{N}_'-]*/,
-        seq(
-          "`",
-          repeat(choice(
-            $.interpolation,
-            alias(token.immediate(/(?:\\(?:[^(])|[^\\`])+/), $.content),
-          )),
-          token.immediate("`"),
+        $._identifier_simple,
+        alias(
+          seq(
+            "`",
+            repeat(choice(
+              $.interpolation,
+              alias(token.immediate(/(?:\\(?:[^(])|[^\\`])+/), $.content),
+            )),
+            token.immediate("`"),
+          ),
+          $._identifier_quoted,
         ),
       ),
 
@@ -224,12 +231,12 @@ export default grammar({
         30,
         seq(
           "if",
-          alias($.expression, $.condition),
+          field("condition", $.expression),
           "then",
-          alias($.expression, $.true_expression),
+          field("true_expression", $.expression),
           optional(seq(
             "else",
-            alias(prec.right(30, $.expression), $.false_expression),
+            field("false_expression", prec.right(30, $.expression)),
           )),
         ),
       ),

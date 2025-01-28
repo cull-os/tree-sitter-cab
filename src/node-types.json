@@ -46,6 +46,25 @@
     ]
   },
   {
+    "type": "_identifier_quoted",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "content",
+          "named": true
+        },
+        {
+          "type": "interpolation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "attribute_list",
     "named": true,
     "fields": {},
@@ -88,11 +107,7 @@
       "required": false,
       "types": [
         {
-          "type": "content",
-          "named": true
-        },
-        {
-          "type": "interpolation",
+          "type": "_identifier_quoted",
           "named": true
         }
       ]
@@ -101,24 +116,37 @@
   {
     "type": "if_else",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "condition",
-          "named": true
-        },
-        {
-          "type": "false_expression",
-          "named": true
-        },
-        {
-          "type": "true_expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "false_expression": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "true_expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -300,10 +328,6 @@
   },
   {
     "type": "]",
-    "named": false
-  },
-  {
-    "type": "`",
     "named": false
   },
   {
