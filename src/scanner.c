@@ -26,20 +26,15 @@ bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
     return false;
   }
 
-  TSLexer local_lexer = *lexer;
   uint32_t start_count = 0;
 
-  while (local_lexer.lookahead == '#') {
+  while (lexer->lookahead == '#') {
     start_count += 1;
-    local_lexer.advance(&local_lexer, false);
+    lexer->advance(lexer, false);
   }
 
   if (start_count < 3) {
     return false;
-  }
-
-  for (uint32_t i = 0; i < start_count; i += 1) {
-    lexer->advance(lexer, false);
   }
 
   uint32_t end_count = 0;
