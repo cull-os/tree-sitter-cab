@@ -1,7 +1,9 @@
+#include <wctype.h>
+
 #include <tree_sitter/parser.h>
 
 typedef enum {
-  MULTILINE_COMMENT,
+  _MULTILINE_COMMENT,
 } TokenType;
 
 void *tree_sitter_cab_external_scanner_create() { return NULL; }
@@ -19,8 +21,13 @@ void tree_sitter_cab_external_scanner_deserialize(void *_payload,
 
 bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  if (!valid_symbols[MULTILINE_COMMENT]) {
+  if (!valid_symbols[_MULTILINE_COMMENT]) {
     return false;
+  }
+
+  /// TODO: ???
+  while (iswspace(lexer->lookahead)) {
+    lexer->advance(lexer, true);
   }
 
   uint32_t start_count = 0;
@@ -50,7 +57,7 @@ bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
     lexer->advance(lexer, false);
   }
 
-  lexer->result_symbol = MULTILINE_COMMENT;
+  lexer->result_symbol = _MULTILINE_COMMENT;
   lexer->mark_end(lexer);
   return true;
 }

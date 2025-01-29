@@ -7,21 +7,20 @@
       "type": "SYMBOL",
       "name": "expression"
     },
+    "_singleline_comment": {
+      "type": "PATTERN",
+      "value": "#{1,2}[^\\n]*"
+    },
     "comment": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "multiline_comment"
+          "name": "_singleline_comment"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "#{1,2}[^\\n]*"
-          },
-          "named": true,
-          "value": "singleline_comment"
+          "type": "SYMBOL",
+          "name": "_multiline_comment"
         }
       ]
     },
@@ -1334,6 +1333,46 @@
       "type": "PATTERN",
       "value": "[\\p{L}_-][\\p{L}\\p{N}_'-]*"
     },
+    "_identifier_quoted": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "`"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "interpolation"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "(?:\\\\(?:[^(])|[^\\\\`])+"
+                  }
+                },
+                "named": true,
+                "value": "content"
+              }
+            ]
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "`"
+          }
+        }
+      ]
+    },
     "identifier": {
       "type": "CHOICE",
       "members": [
@@ -1342,49 +1381,8 @@
           "name": "_identifier_simple"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "`"
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "interpolation"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "IMMEDIATE_TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "(?:\\\\(?:[^(])|[^\\\\`])+"
-                        }
-                      },
-                      "named": true,
-                      "value": "content"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "STRING",
-                  "value": "`"
-                }
-              }
-            ]
-          },
-          "named": true,
-          "value": "_identifier_quoted"
+          "type": "SYMBOL",
+          "name": "_identifier_quoted"
         }
       ]
     },
@@ -1600,7 +1598,7 @@
   "externals": [
     {
       "type": "SYMBOL",
-      "name": "multiline_comment"
+      "name": "_multiline_comment"
     }
   ],
   "inline": [],

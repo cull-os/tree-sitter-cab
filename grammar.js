@@ -2,7 +2,7 @@ export default grammar({
   name: "cab",
 
   externals: ($) => [
-    $.multiline_comment,
+    $._multiline_comment,
   ],
 
   extras: ($) => [
@@ -19,10 +19,12 @@ export default grammar({
   rules: {
     source_code: ($) => $.expression,
 
+    _singleline_comment: ($) => /#{1,2}[^\n]*/,
+
     comment: ($) =>
       choice(
-        $.multiline_comment,
-        alias(/#{1,2}[^\n]*/, $.singleline_comment),
+        $._singleline_comment,
+        $._multiline_comment,
       ),
 
     expression: ($) =>
@@ -182,21 +184,20 @@ export default grammar({
       ),
 
     _identifier_simple: ($) => /[\p{L}_-][\p{L}\p{N}_'-]*/,
+    _identifier_quoted: ($) =>
+      seq(
+        "`",
+        repeat(choice(
+          $.interpolation,
+          alias(token.immediate(/(?:\\(?:[^(])|[^\\`])+/), $.content),
+        )),
+        token.immediate("`"),
+      ),
 
     identifier: ($) =>
       choice(
         $._identifier_simple,
-        alias(
-          seq(
-            "`",
-            repeat(choice(
-              $.interpolation,
-              alias(token.immediate(/(?:\\(?:[^(])|[^\\`])+/), $.content),
-            )),
-            token.immediate("`"),
-          ),
-          $._identifier_quoted,
-        ),
+        $._identifier_quoted,
       ),
 
     string: ($) =>

@@ -1,12 +1,26 @@
-========
-Comments
-========
+==========
+Multiline comments
+==========
 
 a ### b ###
 
----
+----------
 
 (source_code
 	(identifier)
-	(comment
-		(mutliline_comment)))
+	(comment))
+
+
+==========
+Singleline comments
+==========
+
+foo ## bar
+# baz
+
+----------
+
+(source_code
+	(identifier)
+	(comment)
+	(comment))
