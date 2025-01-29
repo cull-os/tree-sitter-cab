@@ -2,11 +2,15 @@
 Multiline comments
 ==========
 
-a ### b ###
+###
+c ###
+a ###
+b ###
 
 ----------
 
 (source_code
+	(comment)
 	(identifier)
 	(comment))
 

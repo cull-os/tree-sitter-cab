@@ -20,6 +20,10 @@
         "named": true
       },
       {
+        "type": "infix_operation",
+        "named": true
+      },
+      {
         "type": "island",
         "named": true
       },
@@ -40,7 +44,15 @@
         "named": true
       },
       {
+        "type": "prefix_operation",
+        "named": true
+      },
+      {
         "type": "string",
+        "named": true
+      },
+      {
+        "type": "suffix_operation",
         "named": true
       }
     ]
@@ -147,6 +159,254 @@
     }
   },
   {
+    "type": "infix_operation",
+    "named": true,
+    "fields": {
+      "left_expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "infix_operation_!=",
+            "named": true
+          },
+          {
+            "type": "infix_operation_&&",
+            "named": true
+          },
+          {
+            "type": "infix_operation_*",
+            "named": true
+          },
+          {
+            "type": "infix_operation_++",
+            "named": true
+          },
+          {
+            "type": "infix_operation_,",
+            "named": true
+          },
+          {
+            "type": "infix_operation_->",
+            "named": true
+          },
+          {
+            "type": "infix_operation_.",
+            "named": true
+          },
+          {
+            "type": "infix_operation_/",
+            "named": true
+          },
+          {
+            "type": "infix_operation_//",
+            "named": true
+          },
+          {
+            "type": "infix_operation_:",
+            "named": true
+          },
+          {
+            "type": "infix_operation_:=",
+            "named": true
+          },
+          {
+            "type": "infix_operation_;",
+            "named": true
+          },
+          {
+            "type": "infix_operation_<|",
+            "named": true
+          },
+          {
+            "type": "infix_operation_==",
+            "named": true
+          },
+          {
+            "type": "infix_operation_=>",
+            "named": true
+          },
+          {
+            "type": "infix_operation_^",
+            "named": true
+          },
+          {
+            "type": "infix_operation_null",
+            "named": true
+          },
+          {
+            "type": "infix_operation_|>",
+            "named": true
+          },
+          {
+            "type": "infix_operation_||",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "infix_operation_!=",
+            "named": true
+          },
+          {
+            "type": "infix_operation_&&",
+            "named": true
+          },
+          {
+            "type": "infix_operation_*",
+            "named": true
+          },
+          {
+            "type": "infix_operation_++",
+            "named": true
+          },
+          {
+            "type": "infix_operation_,",
+            "named": true
+          },
+          {
+            "type": "infix_operation_->",
+            "named": true
+          },
+          {
+            "type": "infix_operation_.",
+            "named": true
+          },
+          {
+            "type": "infix_operation_/",
+            "named": true
+          },
+          {
+            "type": "infix_operation_//",
+            "named": true
+          },
+          {
+            "type": "infix_operation_:",
+            "named": true
+          },
+          {
+            "type": "infix_operation_:=",
+            "named": true
+          },
+          {
+            "type": "infix_operation_;",
+            "named": true
+          },
+          {
+            "type": "infix_operation_<|",
+            "named": true
+          },
+          {
+            "type": "infix_operation_==",
+            "named": true
+          },
+          {
+            "type": "infix_operation_=>",
+            "named": true
+          },
+          {
+            "type": "infix_operation_^",
+            "named": true
+          },
+          {
+            "type": "infix_operation_|>",
+            "named": true
+          },
+          {
+            "type": "infix_operation_||",
+            "named": true
+          }
+        ]
+      },
+      "right_expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "infix_operation_!=",
+            "named": true
+          },
+          {
+            "type": "infix_operation_&&",
+            "named": true
+          },
+          {
+            "type": "infix_operation_*",
+            "named": true
+          },
+          {
+            "type": "infix_operation_++",
+            "named": true
+          },
+          {
+            "type": "infix_operation_,",
+            "named": true
+          },
+          {
+            "type": "infix_operation_->",
+            "named": true
+          },
+          {
+            "type": "infix_operation_.",
+            "named": true
+          },
+          {
+            "type": "infix_operation_/",
+            "named": true
+          },
+          {
+            "type": "infix_operation_//",
+            "named": true
+          },
+          {
+            "type": "infix_operation_:",
+            "named": true
+          },
+          {
+            "type": "infix_operation_:=",
+            "named": true
+          },
+          {
+            "type": "infix_operation_;",
+            "named": true
+          },
+          {
+            "type": "infix_operation_<|",
+            "named": true
+          },
+          {
+            "type": "infix_operation_==",
+            "named": true
+          },
+          {
+            "type": "infix_operation_=>",
+            "named": true
+          },
+          {
+            "type": "infix_operation_^",
+            "named": true
+          },
+          {
+            "type": "infix_operation_null",
+            "named": true
+          },
+          {
+            "type": "infix_operation_|>",
+            "named": true
+          },
+          {
+            "type": "infix_operation_||",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "interpolation",
     "named": true,
     "fields": {},
@@ -235,6 +495,56 @@
     }
   },
   {
+    "type": "prefix_operation",
+    "named": true,
+    "fields": {
+      "expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "prefix_operation_!",
+            "named": true
+          },
+          {
+            "type": "prefix_operation_+",
+            "named": true
+          },
+          {
+            "type": "prefix_operation_-",
+            "named": true
+          },
+          {
+            "type": "prefix_operation_?",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "prefix_operation_!",
+            "named": true
+          },
+          {
+            "type": "prefix_operation_+",
+            "named": true
+          },
+          {
+            "type": "prefix_operation_-",
+            "named": true
+          },
+          {
+            "type": "prefix_operation_?",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "source_code",
     "named": true,
     "root": true,
@@ -267,6 +577,40 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "suffix_operation",
+    "named": true,
+    "fields": {
+      "expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "suffix_operation_,",
+            "named": true
+          },
+          {
+            "type": "suffix_operation_;",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "suffix_operation_,",
+            "named": true
+          },
+          {
+            "type": "suffix_operation_;",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -318,8 +662,104 @@
     "named": false
   },
   {
+    "type": "infix_operation_!=",
+    "named": true
+  },
+  {
+    "type": "infix_operation_&&",
+    "named": true
+  },
+  {
+    "type": "infix_operation_*",
+    "named": true
+  },
+  {
+    "type": "infix_operation_++",
+    "named": true
+  },
+  {
+    "type": "infix_operation_,",
+    "named": true
+  },
+  {
+    "type": "infix_operation_->",
+    "named": true
+  },
+  {
+    "type": "infix_operation_.",
+    "named": true
+  },
+  {
+    "type": "infix_operation_/",
+    "named": true
+  },
+  {
+    "type": "infix_operation_//",
+    "named": true
+  },
+  {
+    "type": "infix_operation_:",
+    "named": true
+  },
+  {
+    "type": "infix_operation_:=",
+    "named": true
+  },
+  {
+    "type": "infix_operation_;",
+    "named": true
+  },
+  {
+    "type": "infix_operation_<|",
+    "named": true
+  },
+  {
+    "type": "infix_operation_==",
+    "named": true
+  },
+  {
+    "type": "infix_operation_=>",
+    "named": true
+  },
+  {
+    "type": "infix_operation_^",
+    "named": true
+  },
+  {
+    "type": "infix_operation_|>",
+    "named": true
+  },
+  {
+    "type": "infix_operation_||",
+    "named": true
+  },
+  {
     "type": "is",
     "named": false
+  },
+  {
+    "type": "prefix_operation_!",
+    "named": true
+  },
+  {
+    "type": "prefix_operation_+",
+    "named": true
+  },
+  {
+    "type": "prefix_operation_-",
+    "named": true
+  },
+  {
+    "type": "prefix_operation_?",
+    "named": true
+  },
+  {
+    "type": "suffix_operation_,",
+    "named": true
+  },
+  {
+    "type": "suffix_operation_;",
+    "named": true
   },
   {
     "type": "then",

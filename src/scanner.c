@@ -3,6 +3,7 @@
 #include <tree_sitter/parser.h>
 
 typedef enum {
+  _SINGLELINE_COMMENT,
   _MULTILINE_COMMENT,
 } TokenType;
 
@@ -21,7 +22,7 @@ void tree_sitter_cab_external_scanner_deserialize(void *_payload,
 
 bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  if (!valid_symbols[_MULTILINE_COMMENT]) {
+  if (!valid_symbols[_SINGLELINE_COMMENT] && !valid_symbols[_MULTILINE_COMMENT]) {
     return false;
   }
 
@@ -37,27 +38,40 @@ bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
     lexer->advance(lexer, false);
   }
 
-  if (start_count < 3) {
+  if (start_count == 0) {
     return false;
   }
 
-  uint32_t end_count = 0;
+  if (start_count < 3) {
+    for (;;) {
+      if (lexer->eof(lexer) || lexer->lookahead == '\n') {
+        break;
+      }
 
-  for (;;) {
-    if (lexer->eof(lexer) || end_count >= start_count) {
-      break;
+      lexer->advance(lexer, false);
     }
 
-    if (lexer->lookahead == '#') {
-      end_count += 1;
-    } else {
-      end_count = 0;
+    lexer->result_symbol = _SINGLELINE_COMMENT;
+  } else {
+    uint32_t end_count = 0;
+
+    for (;;) {
+      if (lexer->eof(lexer) || end_count >= start_count) {
+        break;
+      }
+
+      if (lexer->lookahead == '#') {
+        end_count += 1;
+      } else {
+        end_count = 0;
+      }
+
+      lexer->advance(lexer, false);
     }
 
-    lexer->advance(lexer, false);
+    lexer->result_symbol = _MULTILINE_COMMENT;
   }
 
-  lexer->result_symbol = _MULTILINE_COMMENT;
   lexer->mark_end(lexer);
   return true;
 }

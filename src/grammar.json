@@ -1,15 +1,11 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "cab",
-  "word": "_identifier_simple",
+  "word": "_identifier_plain",
   "rules": {
     "source_code": {
       "type": "SYMBOL",
       "name": "expression"
-    },
-    "_singleline_comment": {
-      "type": "PATTERN",
-      "value": "#{1,2}[^\\n]*"
     },
     "comment": {
       "type": "CHOICE",
@@ -38,6 +34,18 @@
         {
           "type": "SYMBOL",
           "name": "attribute_list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "prefix_operation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "infix_operation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "suffix_operation"
         },
         {
           "type": "SYMBOL",
@@ -488,82 +496,6 @@
           "type": "ALIAS",
           "content": {
             "type": "PREC_RIGHT",
-            "value": 145,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "left_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "operator",
-                  "content": {
-                    "type": "STRING",
-                    "value": "+"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "infix_operation_+"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_RIGHT",
-            "value": 145,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "left_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "operator",
-                  "content": {
-                    "type": "STRING",
-                    "value": "-"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "infix_operation_-"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_RIGHT",
             "value": 125,
             "content": {
               "type": "SEQ",
@@ -597,158 +529,6 @@
           },
           "named": true,
           "value": "infix_operation_//"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_RIGHT",
-            "value": 115,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "left_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "operator",
-                  "content": {
-                    "type": "STRING",
-                    "value": "<="
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "infix_operation_<="
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_RIGHT",
-            "value": 115,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "left_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "operator",
-                  "content": {
-                    "type": "STRING",
-                    "value": "<"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "infix_operation_<"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_RIGHT",
-            "value": 115,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "left_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "operator",
-                  "content": {
-                    "type": "STRING",
-                    "value": ">="
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "infix_operation_>="
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PREC_RIGHT",
-            "value": 115,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "left_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "operator",
-                  "content": {
-                    "type": "STRING",
-                    "value": ">"
-                  }
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right_expression",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "expression"
-                  }
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "infix_operation_>"
         },
         {
           "type": "ALIAS",
@@ -1329,7 +1109,7 @@
         }
       ]
     },
-    "_identifier_simple": {
+    "_identifier_plain": {
       "type": "PATTERN",
       "value": "[\\p{L}_-][\\p{L}\\p{N}_'-]*"
     },
@@ -1378,7 +1158,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_identifier_simple"
+          "name": "_identifier_plain"
         },
         {
           "type": "SYMBOL",
@@ -1586,7 +1366,7 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s+"
+      "value": "\\s"
     },
     {
       "type": "SYMBOL",
@@ -1596,6 +1376,10 @@
   "conflicts": [],
   "precedences": [],
   "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_singleline_comment"
+    },
     {
       "type": "SYMBOL",
       "name": "_multiline_comment"

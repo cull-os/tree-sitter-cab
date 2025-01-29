@@ -2,11 +2,12 @@ export default grammar({
   name: "cab",
 
   externals: ($) => [
+    $._singleline_comment,
     $._multiline_comment,
   ],
 
   extras: ($) => [
-    /\s+/,
+    /\s/,
     $.comment,
   ],
 
@@ -14,12 +15,10 @@ export default grammar({
     $.expression,
   ],
 
-  word: ($) => $._identifier_simple,
+  word: ($) => $._identifier_plain,
 
   rules: {
     source_code: ($) => $.expression,
-
-    _singleline_comment: ($) => /#{1,2}[^\n]*/,
 
     comment: ($) =>
       choice(
@@ -32,9 +31,9 @@ export default grammar({
         $.parenthesis,
         $.list,
         $.attribute_list,
-        // $.prefix_operation,
-        // $.infix_operation,
-        // $.suffix_operation,
+        $.prefix_operation,
+        $.infix_operation,
+        $.suffix_operation,
         $.path,
         $.identifier,
         $.string,
@@ -103,17 +102,17 @@ export default grammar({
 
           // + -
 
-          ["+", [140, 145]],
-          ["-", [140, 145]],
+          // ["+", [140, 145]],
+          // ["-", [140, 145]],
 
           // !
 
           ["//", [120, 125]],
 
-          ["<=", [110, 115]],
-          ["<", [110, 115]],
-          [">=", [110, 115]],
-          [">", [110, 115]],
+          // ["<=", [110, 115]],
+          // ["<", [110, 115]],
+          // [">=", [110, 115]],
+          // [">", [110, 115]],
           // ?
 
           [":", [105, 100]],
@@ -183,7 +182,7 @@ export default grammar({
         )),
       ),
 
-    _identifier_simple: ($) => /[\p{L}_-][\p{L}\p{N}_'-]*/,
+    _identifier_plain: ($) => /[\p{L}_-][\p{L}\p{N}_'-]*/,
     _identifier_quoted: ($) =>
       seq(
         "`",
@@ -196,7 +195,7 @@ export default grammar({
 
     identifier: ($) =>
       choice(
-        $._identifier_simple,
+        $._identifier_plain,
         $._identifier_quoted,
       ),
 
