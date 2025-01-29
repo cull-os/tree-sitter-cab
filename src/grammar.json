@@ -1601,10 +1601,6 @@
     {
       "type": "SYMBOL",
       "name": "multiline_comment"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "error_senitel"
     }
   ],
   "inline": [],

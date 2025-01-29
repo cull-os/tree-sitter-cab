@@ -3,7 +3,6 @@ export default grammar({
 
   externals: ($) => [
     $.multiline_comment,
-    $.error_senitel,
   ],
 
   extras: ($) => [
@@ -11,7 +10,9 @@ export default grammar({
     $.comment,
   ],
 
-  supertypes: ($) => [$.expression],
+  supertypes: ($) => [
+    $.expression,
+  ],
 
   word: ($) => $._identifier_simple,
 

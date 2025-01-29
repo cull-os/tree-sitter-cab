@@ -2,7 +2,6 @@
 
 typedef enum {
   MULTILINE_COMMENT,
-  ERROR_SENITEL,
 } TokenType;
 
 void *tree_sitter_cab_external_scanner_create() { return NULL; }
@@ -20,10 +19,6 @@ void tree_sitter_cab_external_scanner_deserialize(void *_payload,
 
 bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  if (valid_symbols[ERROR_SENITEL]) {
-    return false;
-  }
-
   if (!valid_symbols[MULTILINE_COMMENT]) {
     return false;
   }
