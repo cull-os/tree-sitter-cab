@@ -3,17 +3,19 @@
 typedef enum {
   MULTILINE_COMMENT,
   ERROR_SENITEL,
-} TokenType ;
+} TokenType;
 
 void *tree_sitter_cab_external_scanner_create() { return NULL; }
 
 void tree_sitter_cab_external_scanner_destroy(void *payload) {}
 
-uint32_t tree_sitter_cab_external_scanner_serialize(void *_paylad, uint8_t *_buffer) {
+uint32_t tree_sitter_cab_external_scanner_serialize(void *_paylad,
+                                                    uint8_t *_buffer) {
   return 0;
 }
 
-void tree_sitter_cab_external_scanner_deserialize(void *_payload, const uint8_t *_buffer,
+void tree_sitter_cab_external_scanner_deserialize(void *_payload,
+                                                  const uint8_t *_buffer,
                                                   uint32_t _length) {}
 
 bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
