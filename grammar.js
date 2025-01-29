@@ -2,8 +2,7 @@ export default grammar({
   name: "cab",
 
   externals: ($) => [
-    $._singleline_comment,
-    $._multiline_comment,
+    $.comment,
   ],
 
   extras: ($) => [
@@ -19,12 +18,6 @@ export default grammar({
 
   rules: {
     source_code: ($) => $.expression,
-
-    comment: ($) =>
-      choice(
-        $._singleline_comment,
-        $._multiline_comment,
-      ),
 
     expression: ($) =>
       choice(

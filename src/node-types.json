@@ -73,11 +73,6 @@
     }
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "identifier",
     "named": true,
     "fields": {},
@@ -648,6 +643,10 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "content",

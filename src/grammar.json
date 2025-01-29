@@ -7,19 +7,6 @@
       "type": "SYMBOL",
       "name": "expression"
     },
-    "comment": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_singleline_comment"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_multiline_comment"
-        }
-      ]
-    },
     "expression": {
       "type": "CHOICE",
       "members": [
@@ -1378,11 +1365,7 @@
   "externals": [
     {
       "type": "SYMBOL",
-      "name": "_singleline_comment"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_multiline_comment"
+      "name": "comment"
     }
   ],
   "inline": [],
