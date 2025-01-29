@@ -1,0 +1,15 @@
+==========
+Prefix negation precedence
+==========
+
+- 3 ^ 4
+
+-----------
+
+(source_code
+	(prefix_operation
+		operator: (-)
+		expression: (infix_operation
+			left_expression: (number)
+			operator: (^)
+			right_expression: (number))))

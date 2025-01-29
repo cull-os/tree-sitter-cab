@@ -162,79 +162,7 @@
         "required": true,
         "types": [
           {
-            "type": "infix_operation_!=",
-            "named": true
-          },
-          {
-            "type": "infix_operation_&&",
-            "named": true
-          },
-          {
-            "type": "infix_operation_*",
-            "named": true
-          },
-          {
-            "type": "infix_operation_++",
-            "named": true
-          },
-          {
-            "type": "infix_operation_,",
-            "named": true
-          },
-          {
-            "type": "infix_operation_->",
-            "named": true
-          },
-          {
-            "type": "infix_operation_.",
-            "named": true
-          },
-          {
-            "type": "infix_operation_/",
-            "named": true
-          },
-          {
-            "type": "infix_operation_//",
-            "named": true
-          },
-          {
-            "type": "infix_operation_:",
-            "named": true
-          },
-          {
-            "type": "infix_operation_:=",
-            "named": true
-          },
-          {
-            "type": "infix_operation_;",
-            "named": true
-          },
-          {
-            "type": "infix_operation_<|",
-            "named": true
-          },
-          {
-            "type": "infix_operation_==",
-            "named": true
-          },
-          {
-            "type": "infix_operation_=>",
-            "named": true
-          },
-          {
-            "type": "infix_operation_^",
-            "named": true
-          },
-          {
-            "type": "infix_operation_null",
-            "named": true
-          },
-          {
-            "type": "infix_operation_|>",
-            "named": true
-          },
-          {
-            "type": "infix_operation_||",
+            "type": "expression",
             "named": true
           }
         ]
@@ -244,75 +172,75 @@
         "required": false,
         "types": [
           {
-            "type": "infix_operation_!=",
+            "type": "!=",
             "named": true
           },
           {
-            "type": "infix_operation_&&",
+            "type": "&&",
             "named": true
           },
           {
-            "type": "infix_operation_*",
+            "type": "*",
             "named": true
           },
           {
-            "type": "infix_operation_++",
+            "type": "++",
             "named": true
           },
           {
-            "type": "infix_operation_,",
+            "type": ",",
             "named": true
           },
           {
-            "type": "infix_operation_->",
+            "type": "->",
             "named": true
           },
           {
-            "type": "infix_operation_.",
+            "type": ".",
             "named": true
           },
           {
-            "type": "infix_operation_/",
+            "type": "/",
             "named": true
           },
           {
-            "type": "infix_operation_//",
+            "type": "//",
             "named": true
           },
           {
-            "type": "infix_operation_:",
+            "type": ":",
             "named": true
           },
           {
-            "type": "infix_operation_:=",
+            "type": ":=",
             "named": true
           },
           {
-            "type": "infix_operation_;",
+            "type": ";",
             "named": true
           },
           {
-            "type": "infix_operation_<|",
+            "type": "<|",
             "named": true
           },
           {
-            "type": "infix_operation_==",
+            "type": "==",
             "named": true
           },
           {
-            "type": "infix_operation_=>",
+            "type": "=>",
             "named": true
           },
           {
-            "type": "infix_operation_^",
+            "type": "^",
             "named": true
           },
           {
-            "type": "infix_operation_|>",
+            "type": "|>",
             "named": true
           },
           {
-            "type": "infix_operation_||",
+            "type": "||",
             "named": true
           }
         ]
@@ -322,79 +250,7 @@
         "required": true,
         "types": [
           {
-            "type": "infix_operation_!=",
-            "named": true
-          },
-          {
-            "type": "infix_operation_&&",
-            "named": true
-          },
-          {
-            "type": "infix_operation_*",
-            "named": true
-          },
-          {
-            "type": "infix_operation_++",
-            "named": true
-          },
-          {
-            "type": "infix_operation_,",
-            "named": true
-          },
-          {
-            "type": "infix_operation_->",
-            "named": true
-          },
-          {
-            "type": "infix_operation_.",
-            "named": true
-          },
-          {
-            "type": "infix_operation_/",
-            "named": true
-          },
-          {
-            "type": "infix_operation_//",
-            "named": true
-          },
-          {
-            "type": "infix_operation_:",
-            "named": true
-          },
-          {
-            "type": "infix_operation_:=",
-            "named": true
-          },
-          {
-            "type": "infix_operation_;",
-            "named": true
-          },
-          {
-            "type": "infix_operation_<|",
-            "named": true
-          },
-          {
-            "type": "infix_operation_==",
-            "named": true
-          },
-          {
-            "type": "infix_operation_=>",
-            "named": true
-          },
-          {
-            "type": "infix_operation_^",
-            "named": true
-          },
-          {
-            "type": "infix_operation_null",
-            "named": true
-          },
-          {
-            "type": "infix_operation_|>",
-            "named": true
-          },
-          {
-            "type": "infix_operation_||",
+            "type": "expression",
             "named": true
           }
         ]
@@ -498,19 +354,7 @@
         "required": true,
         "types": [
           {
-            "type": "prefix_operation_!",
-            "named": true
-          },
-          {
-            "type": "prefix_operation_+",
-            "named": true
-          },
-          {
-            "type": "prefix_operation_-",
-            "named": true
-          },
-          {
-            "type": "prefix_operation_?",
+            "type": "expression",
             "named": true
           }
         ]
@@ -520,19 +364,19 @@
         "required": true,
         "types": [
           {
-            "type": "prefix_operation_!",
+            "type": "!",
             "named": true
           },
           {
-            "type": "prefix_operation_+",
+            "type": "+",
             "named": true
           },
           {
-            "type": "prefix_operation_-",
+            "type": "-",
             "named": true
           },
           {
-            "type": "prefix_operation_?",
+            "type": "?",
             "named": true
           }
         ]
@@ -583,11 +427,7 @@
         "required": true,
         "types": [
           {
-            "type": "suffix_operation_,",
-            "named": true
-          },
-          {
-            "type": "suffix_operation_;",
+            "type": "expression",
             "named": true
           }
         ]
@@ -597,11 +437,11 @@
         "required": true,
         "types": [
           {
-            "type": "suffix_operation_,",
+            "type": ",",
             "named": true
           },
           {
-            "type": "suffix_operation_;",
+            "type": ";",
             "named": true
           }
         ]
@@ -609,8 +449,20 @@
     }
   },
   {
+    "type": "!",
+    "named": true
+  },
+  {
+    "type": "!=",
+    "named": true
+  },
+  {
     "type": "\"",
     "named": false
+  },
+  {
+    "type": "&&",
+    "named": true
   },
   {
     "type": "(",
@@ -621,12 +473,76 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": true
+  },
+  {
+    "type": "+",
+    "named": true
+  },
+  {
+    "type": "++",
+    "named": true
+  },
+  {
+    "type": ",",
+    "named": true
+  },
+  {
+    "type": "-",
+    "named": true
+  },
+  {
+    "type": "->",
+    "named": true
+  },
+  {
+    "type": ".",
+    "named": true
+  },
+  {
+    "type": "/",
+    "named": true
+  },
+  {
+    "type": "//",
+    "named": true
+  },
+  {
+    "type": ":",
+    "named": true
+  },
+  {
+    "type": ":=",
+    "named": true
+  },
+  {
+    "type": ";",
+    "named": true
+  },
+  {
     "type": "<",
     "named": false
   },
   {
+    "type": "<|",
+    "named": true
+  },
+  {
+    "type": "==",
+    "named": true
+  },
+  {
+    "type": "=>",
+    "named": true
+  },
+  {
     "type": ">",
     "named": false
+  },
+  {
+    "type": "?",
+    "named": true
   },
   {
     "type": "[",
@@ -639,6 +555,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "^",
+    "named": true
   },
   {
     "type": "`",
@@ -661,104 +581,8 @@
     "named": false
   },
   {
-    "type": "infix_operation_!=",
-    "named": true
-  },
-  {
-    "type": "infix_operation_&&",
-    "named": true
-  },
-  {
-    "type": "infix_operation_*",
-    "named": true
-  },
-  {
-    "type": "infix_operation_++",
-    "named": true
-  },
-  {
-    "type": "infix_operation_,",
-    "named": true
-  },
-  {
-    "type": "infix_operation_->",
-    "named": true
-  },
-  {
-    "type": "infix_operation_.",
-    "named": true
-  },
-  {
-    "type": "infix_operation_/",
-    "named": true
-  },
-  {
-    "type": "infix_operation_//",
-    "named": true
-  },
-  {
-    "type": "infix_operation_:",
-    "named": true
-  },
-  {
-    "type": "infix_operation_:=",
-    "named": true
-  },
-  {
-    "type": "infix_operation_;",
-    "named": true
-  },
-  {
-    "type": "infix_operation_<|",
-    "named": true
-  },
-  {
-    "type": "infix_operation_==",
-    "named": true
-  },
-  {
-    "type": "infix_operation_=>",
-    "named": true
-  },
-  {
-    "type": "infix_operation_^",
-    "named": true
-  },
-  {
-    "type": "infix_operation_|>",
-    "named": true
-  },
-  {
-    "type": "infix_operation_||",
-    "named": true
-  },
-  {
     "type": "is",
     "named": false
-  },
-  {
-    "type": "prefix_operation_!",
-    "named": true
-  },
-  {
-    "type": "prefix_operation_+",
-    "named": true
-  },
-  {
-    "type": "prefix_operation_-",
-    "named": true
-  },
-  {
-    "type": "prefix_operation_?",
-    "named": true
-  },
-  {
-    "type": "suffix_operation_,",
-    "named": true
-  },
-  {
-    "type": "suffix_operation_;",
-    "named": true
   },
   {
     "type": "then",
@@ -767,6 +591,14 @@
   {
     "type": "{",
     "named": false
+  },
+  {
+    "type": "|>",
+    "named": true
+  },
+  {
+    "type": "||",
+    "named": true
   },
   {
     "type": "}",

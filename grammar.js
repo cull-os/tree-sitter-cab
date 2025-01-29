@@ -66,18 +66,12 @@ export default grammar({
 
         ["?", 115],
       ].map(([operator, precedence]) =>
-        alias(
-          prec(
-            precedence,
-            seq(
-              field(
-                "operator",
-                operator,
-              ),
-              field("expression", $.expression),
-            ),
+        prec(
+          precedence,
+          seq(
+            field("operator", alias(operator, $[operator])),
+            field("expression", $.expression),
           ),
-          $[`prefix_operation_${operator}`],
         )
       )),
 
@@ -126,16 +120,15 @@ export default grammar({
           [",", [25, 20]],
           [";", [15, 10]],
         ].map(([operator, [left, right]]) =>
-          alias(
-            (left > right ? prec.left : prec.right)(
-              Math.max(left, right),
-              seq(
-                field("left_expression", $.expression),
-                ...operator !== null ? [field("operator", operator)] : [],
-                field("right_expression", $.expression),
-              ),
+          (left > right ? prec.left : prec.right)(
+            Math.max(left, right),
+            seq(
+              field("left_expression", $.expression),
+              ...operator !== null
+                ? [field("operator", alias(operator, $[operator]))]
+                : [],
+              field("right_expression", $.expression),
             ),
-            $[`infix_operation_${operator}`],
           )
         ),
       ),
@@ -146,15 +139,12 @@ export default grammar({
           [",", 26],
           [";", 16],
         ].map(([operator, precedence]) =>
-          alias(
-            prec(
-              precedence,
-              seq(
-                field("expression", $.expression),
-                field("operator", operator),
-              ),
+          prec(
+            precedence,
+            seq(
+              field("expression", $.expression),
+              field("operator", alias(operator, $[operator])),
             ),
-            $[`suffix_operation_${operator}`],
           )
         ),
       ),
