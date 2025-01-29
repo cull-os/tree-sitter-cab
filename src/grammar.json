@@ -1098,7 +1098,7 @@
     },
     "_identifier_plain": {
       "type": "PATTERN",
-      "value": "[\\p{L}_-][\\p{L}\\p{N}_'-]*"
+      "value": "[\\p{L}_][\\p{L}\\p{N}_'-]*"
     },
     "_identifier_quoted": {
       "type": "SEQ",

@@ -175,7 +175,7 @@ export default grammar({
         )),
       ),
 
-    _identifier_plain: ($) => /[\p{L}_-][\p{L}\p{N}_'-]*/,
+    _identifier_plain: ($) => /[\p{L}_][\p{L}\p{N}_'-]*/,
     _identifier_quoted: ($) =>
       seq(
         "`",
