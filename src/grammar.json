@@ -1053,8 +1053,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "\""
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "\""
+          },
+          "named": true,
+          "value": "string_start"
         },
         {
           "type": "REPEAT",
@@ -1093,11 +1098,16 @@
           }
         },
         {
-          "type": "IMMEDIATE_TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "\""
-          }
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "\""
+            }
+          },
+          "named": true,
+          "value": "string_start"
         }
       ]
     },
@@ -1135,7 +1145,7 @@
                   "type": "IMMEDIATE_TOKEN",
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\\\\<]+"
+                    "value": "[^\\\\>]+"
                   }
                 },
                 "named": true,

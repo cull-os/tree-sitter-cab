@@ -197,13 +197,13 @@ export default grammar({
 
     string: ($) =>
       seq(
-        '"',
+        alias('"', $.string_start),
         repeat(choice(
           $.interpolation,
           alias(token.immediate(/\\[^(]/), $.escape),
           alias(token.immediate(/[^\\"]+/), $.content),
         )),
-        token.immediate('"'),
+        alias(token.immediate('"'), $.string_start),
       ),
 
     island: ($) =>
@@ -212,7 +212,7 @@ export default grammar({
         repeat(choice(
           $.interpolation,
           alias(token.immediate(/\\[^(]/), $.escape),
-          alias(token.immediate(/[^\\<]+/), $.content),
+          alias(token.immediate(/[^\\>]+/), $.content),
         )),
         token.immediate(">"),
       ),

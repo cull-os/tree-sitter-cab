@@ -617,7 +617,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "content",
@@ -629,6 +629,10 @@
         },
         {
           "type": "interpolation",
+          "named": true
+        },
+        {
+          "type": "string_start",
           "named": true
         }
       ]
@@ -670,10 +674,6 @@
   },
   {
     "type": "!=",
-    "named": false
-  },
-  {
-    "type": "\"",
     "named": false
   },
   {
@@ -803,6 +803,10 @@
   {
     "type": "is",
     "named": false
+  },
+  {
+    "type": "string_start",
+    "named": true
   },
   {
     "type": "then",
