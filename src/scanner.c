@@ -3,7 +3,8 @@
 #include <tree_sitter/parser.h>
 
 typedef enum {
-  COMMENT,
+  SINGLELINE_COMMENT,
+  MULTILINE_COMMENT,
 } TokenType;
 
 void *tree_sitter_cab_external_scanner_create() { return NULL; }
@@ -21,7 +22,7 @@ void tree_sitter_cab_external_scanner_deserialize(void *_payload,
 
 bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  if (!valid_symbols[COMMENT]) {
+  if (!valid_symbols[SINGLELINE_COMMENT] && !valid_symbols[MULTILINE_COMMENT]) {
     return false;
   }
 
@@ -48,6 +49,8 @@ bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
 
       lexer->advance(lexer, false);
     }
+
+    lexer->result_symbol = SINGLELINE_COMMENT;
   } else {
     uint32_t end_count = 0;
 
@@ -64,9 +67,10 @@ bool tree_sitter_cab_external_scanner_scan(void *_paylad, TSLexer *lexer,
 
       lexer->advance(lexer, false);
     }
+
+    lexer->result_symbol = MULTILINE_COMMENT;
   }
 
-  lexer->result_symbol = COMMENT;
   lexer->mark_end(lexer);
   return true;
 }

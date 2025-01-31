@@ -1,4 +1,7 @@
-(comment) @comment
+[
+  (singleline_comment)
+  (multiline_comment)
+] @comment
 
 [
   "("

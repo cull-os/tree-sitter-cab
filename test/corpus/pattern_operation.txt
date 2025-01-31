@@ -1,0 +1,33 @@
+==========
+Lambda with a list of attributes
+==========
+
+[
+	{
+		a
+	},
+	[
+		{
+			b
+		}
+	],
+	c,
+] => 1 + b
+
+----------
+
+(source_code
+	(infix_operation
+		left: (pattern_list
+			(pattern_attribute_list
+				(pattern_identifier
+					(identifier)))
+			(pattern_list
+				(pattern_attribute_list
+					(pattern_identifier
+						(identifier))))
+			(pattern_identifier
+				(identifier)))
+		right: (infix_operation
+			left: (number)
+			right: (identifier))))

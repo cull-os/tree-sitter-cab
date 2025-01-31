@@ -1107,7 +1107,7 @@
             }
           },
           "named": true,
-          "value": "string_start"
+          "value": "string_end"
         }
       ]
     },
@@ -1790,7 +1790,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "comment"
+      "name": "singleline_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "multiline_comment"
     }
   ],
   "conflicts": [],
@@ -1798,7 +1802,11 @@
   "externals": [
     {
       "type": "SYMBOL",
-      "name": "comment"
+      "name": "singleline_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "multiline_comment"
     }
   ],
   "inline": [],

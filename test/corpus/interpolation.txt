@@ -8,9 +8,11 @@ String interpolation
 
 (source_code
 	(string
+		(string_start)
 		(content)
 		(interpolation
-			(identifier))))
+			(identifier))
+		(string_end)))
 
 ==========
 String multiline-interpolation
@@ -24,6 +26,8 @@ String multiline-interpolation
 
 (source_code
 	(string
+		(string_start)
 		(content)
 		(interpolation
-			(identifier))))
+			(identifier))
+		(string_end)))

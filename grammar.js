@@ -6,12 +6,14 @@ export default grammar({
   name: "cab",
 
   externals: ($) => [
-    $.comment,
+    $.singleline_comment,
+    $.multiline_comment,
   ],
 
   extras: ($) => [
     /\s/,
-    $.comment,
+    $.singleline_comment,
+    $.multiline_comment,
   ],
 
   supertypes: ($) => [
@@ -203,7 +205,7 @@ export default grammar({
           alias(token.immediate(/\\[^(]/), $.escape),
           alias(token.immediate(/[^\\"]+/), $.content),
         )),
-        alias(token.immediate('"'), $.string_start),
+        alias(token.immediate('"'), $.string_end),
       ),
 
     island: ($) =>

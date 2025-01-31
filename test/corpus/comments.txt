@@ -10,9 +10,9 @@ b ###
 ----------
 
 (source_code
-	(comment)
+	(multiline_comment)
 	(identifier)
-	(comment))
+	(multiline_comment))
 
 
 ==========
@@ -26,5 +26,5 @@ foo ## bar
 
 (source_code
 	(identifier)
-	(comment)
-	(comment))
+	(singleline_comment)
+	(singleline_comment))
