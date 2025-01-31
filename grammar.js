@@ -21,6 +21,15 @@ export default grammar({
     $.pattern,
   ],
 
+  conflicts: ($) => [
+    [$.pattern_list, $.list],
+    [$.pattern_attribute_list, $.attribute_list],
+    [$.pattern_attribute_list, $.expression],
+    [$.pattern_identifier, $.expression],
+    [$.pattern_string, $.expression],
+    [$.pattern_number, $.expression],
+  ],
+
   word: ($) => $._identifier_plain,
 
   rules: {
@@ -262,83 +271,71 @@ export default grammar({
       ),
 
     pattern_parenthesis: ($) =>
-      prec(
-        -1,
-        seq(
-          "(",
-          $.pattern,
-          ")",
-        ),
+      seq(
+        "(",
+        $.pattern,
+        ")",
       ),
 
     pattern_list: ($) =>
-      prec(
-        -1,
-        seq(
-          "[",
-          optional(sepTrailing(
-            $.pattern,
-            ",",
-          )),
-          "]",
-        ),
+      seq(
+        "[",
+        optional(sepTrailing(
+          $.pattern,
+          ",",
+        )),
+        "]",
       ),
 
     pattern_attribute_list: ($) =>
-      prec(
-        -1,
-        seq(
-          "{",
-          optional(sepTrailing(
-            choice(
-              $.pattern,
-              prec(-1, $.infix_operation),
-            ),
-            ",",
-          )),
-          "}",
-        ),
+      seq(
+        "{",
+        optional(sepTrailing(
+          choice(
+            $.pattern,
+            $.infix_operation,
+          ),
+          ",",
+        )),
+        "}",
       ),
 
     pattern_infix_operation: ($) =>
-      prec(
-        -1,
-        choice(
-          ...[
-            [null, [185, 180]],
+      choice(
+        ...[
+          [null, [185, 180]],
 
-            ["*", [160, 165]],
-            ["/", [160, 165]],
-            ["^", [165, 160]],
+          ["*", [160, 165]],
+          ["/", [160, 165]],
+          ["^", [165, 160]],
 
-            ["+", [140, 145]],
-            ["-", [140, 145]],
+          ["+", [140, 145]],
+          ["-", [140, 145]],
 
-            ["|>", [50, 55]],
-            ["<|", [55, 50]],
-          ].map(([operator, [left, right]]) =>
-            (left > right ? prec.left : prec.right)(
-              Math.max(left, right),
-              seq(
-                field(
-                  "left_pattern",
-                  operator === null || operator === "<|"
-                    ? $.expression
-                    : $.pattern,
-                ),
-                ...operator !== null ? [field("operator", operator)] : [],
-                field(
-                  "right_pattern",
-                  operator === "|>" ? $.expression : $.pattern,
-                ),
+          ["|>", [50, 55]],
+          ["<|", [55, 50]],
+        ].map(([operator, [left, right]]) =>
+          (left > right ? prec.left : prec.right)(
+            Math.max(left, right),
+            seq(
+              field(
+                "left_pattern",
+                operator === null || operator === "<|"
+                  ? $.expression
+                  : $.pattern,
               ),
-            )
-          ),
+              ...operator !== null ? [field("operator", operator)] : [],
+              field(
+                "right_pattern",
+                operator === "|>" ? $.expression : $.pattern,
+              ),
+            ),
+          )
         ),
       ),
 
-    pattern_identifier: ($) => prec(-1, $.identifier),
-    pattern_string: ($) => prec(-1, $.string),
-    pattern_number: ($) => prec(-1, $.number),
+    pattern_identifier: ($) => $.identifier,
+    pattern_string: ($) => $.string,
+    pattern_number: ($) => $.number,
   },
 });
