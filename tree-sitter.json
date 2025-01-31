@@ -7,6 +7,8 @@
       "file-types": [
         ".cab"
       ],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
       "injection-regex": "^cab$"
     }
   ],
@@ -20,7 +22,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/cull-os/cab"
+      "repository": "https://github.com/cull-os/tree-sitter-cab"
     }
   },
   "bindings": {

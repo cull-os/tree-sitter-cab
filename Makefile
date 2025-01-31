@@ -3,7 +3,7 @@ $(error Windows is not supported)
 endif
 
 LANGUAGE_NAME := tree-sitter-cab
-HOMEPAGE_URL := https://github.com/cull-os/cab
+HOMEPAGE_URL := https://github.com/cull-os/tree-sitter-cab
 VERSION := 0.0.1
 
 # repository

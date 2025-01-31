@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "cab"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/cull-os/cab"
+repository = "https://github.com/cull-os/tree-sitter-cab"
 edition = "2021"
 autoexamples = false
 

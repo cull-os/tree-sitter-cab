@@ -3,8 +3,8 @@ package tree_sitter_cab_test
 import (
 	"testing"
 
-	tree_sitter "github.com/tree-sitter/go-tree-sitter"
-	tree_sitter_cab "github.com/cull-os/cab/bindings/go"
+	tree_sitter_cab "github.com/cull-os/tree-sitcab/bindings/go"
+	tree_sitter "github.com/tree-sittering-tree-sitters/go"
 )
 
 func TestCanLoadGrammar(t *testing.T) {

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(tree-sitter-cab
         VERSION "0.0.1"
         DESCRIPTION "A reproducible contextful expression language"
-        HOMEPAGE_URL "https://github.com/cull-os/cab"
+        HOMEPAGE_URL "https://github.com/cull-os/tree-sitter-cab"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

@@ -2,7 +2,7 @@
   "name": "tree-sitter-cab",
   "version": "0.0.1",
   "description": "A reproducible contextful expression language",
-  "repository": "https://github.com/cull-os/cab",
+  "repository": "https://github.com/cull-os/tree-sitter-cab",
   "license": "MIT",
   "author": {
     "name": "Cab Contributors"
@@ -20,11 +20,9 @@
     "grammar.js",
     "tree-sitter.json",
     "binding.gyp",
-    "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**",
-    "*.wasm"
+    "src/**"
   ],
   "dependencies": {
     "node-addon-api": "^8.2.1",

@@ -1,3 +1,7 @@
+const sepTrailing = (rule, separator) => seq(sep(rule, ","), optional(","));
+
+const sep = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
+
 export default grammar({
   name: "cab",
 
@@ -12,6 +16,7 @@ export default grammar({
 
   supertypes: ($) => [
     $.expression,
+    $.pattern,
   ],
 
   word: ($) => $._identifier_plain,
@@ -69,8 +74,8 @@ export default grammar({
         prec(
           precedence,
           seq(
-            field("operator", alias(operator, $[operator])),
-            field("expression", $.expression),
+            field("operator", operator),
+            field("right", $.expression),
           ),
         )
       )),
@@ -123,11 +128,17 @@ export default grammar({
           (left > right ? prec.left : prec.right)(
             Math.max(left, right),
             seq(
-              field("left_expression", $.expression),
-              ...operator !== null
-                ? [field("operator", alias(operator, $[operator]))]
-                : [],
-              field("right_expression", $.expression),
+              field(
+                "left",
+                operator === "=>" || operator === ":="
+                  ? $.pattern
+                  : $.expression,
+              ),
+              ...operator !== null ? [field("operator", operator)] : [],
+              field(
+                "right",
+                $.expression,
+              ),
             ),
           )
         ),
@@ -136,14 +147,14 @@ export default grammar({
     suffix_operation: ($) =>
       choice(
         ...[
-          [",", 26],
-          [";", 16],
+          [",", 24],
+          [";", 14],
         ].map(([operator, precedence]) =>
           prec(
             precedence,
             seq(
-              field("expression", $.expression),
-              field("operator", alias(operator, $[operator])),
+              field("left", $.expression),
+              field("operator", operator),
             ),
           )
         ),
@@ -153,7 +164,7 @@ export default grammar({
       seq(
         token.immediate("\\("),
         $.expression,
-        token.immediate(")"),
+        ")",
       ),
 
     path: ($) =>
@@ -161,7 +172,8 @@ export default grammar({
         /(\.?\/|\.\.)(?:[\p{L}\p{N}.\/_-]|\\[^(])*/,
         repeat(choice(
           $.interpolation,
-          alias(token.immediate(/(?:[\p{L}\p{N}.\/_-]|\\[^(])+/), $.content),
+          alias(token.immediate(/\\[^(]/), $.escape),
+          alias(token.immediate(/[\p{L}\p{N}.\/_-]+/), $.content),
         )),
       ),
 
@@ -171,7 +183,8 @@ export default grammar({
         "`",
         repeat(choice(
           $.interpolation,
-          alias(token.immediate(/(?:\\(?:[^(])|[^\\`])+/), $.content),
+          alias(token.immediate(/\\[^(]/), $.escape),
+          alias(token.immediate(/[^\\`]+/), $.content),
         )),
         token.immediate("`"),
       ),
@@ -187,7 +200,8 @@ export default grammar({
         '"',
         repeat(choice(
           $.interpolation,
-          alias(token.immediate(/(?:\\(?:[^(])|[^\\"])+/), $.content),
+          alias(token.immediate(/\\[^(]/), $.escape),
+          alias(token.immediate(/[^\\"]+/), $.content),
         )),
         token.immediate('"'),
       ),
@@ -197,7 +211,8 @@ export default grammar({
         "<",
         repeat(choice(
           $.interpolation,
-          alias(token.immediate(/(?:\\(?:[^(])|[^\\>])+/), $.content),
+          alias(token.immediate(/\\[^(]/), $.escape),
+          alias(token.immediate(/[^\\<]+/), $.content),
         )),
         token.immediate(">"),
       ),
@@ -232,5 +247,96 @@ export default grammar({
         "is",
         field("match_expression", prec(20, $.expression)),
       ),
+
+    pattern: ($) =>
+      choice(
+        $.pattern_parenthesis,
+        $.pattern_list,
+        $.pattern_attribute_list,
+        $.pattern_infix_operation,
+        $.pattern_identifier,
+        $.pattern_string,
+        $.pattern_number,
+      ),
+
+    pattern_parenthesis: ($) =>
+      prec(
+        -1,
+        seq(
+          "(",
+          $.pattern,
+          ")",
+        ),
+      ),
+
+    pattern_list: ($) =>
+      prec(
+        -1,
+        seq(
+          "[",
+          optional(sepTrailing(
+            $.pattern,
+            ",",
+          )),
+          "]",
+        ),
+      ),
+
+    pattern_attribute_list: ($) =>
+      prec(
+        -1,
+        seq(
+          "{",
+          optional(sepTrailing(
+            choice(
+              $.pattern,
+              prec(-1, $.infix_operation),
+            ),
+            ",",
+          )),
+          "}",
+        ),
+      ),
+
+    pattern_infix_operation: ($) =>
+      prec(
+        -1,
+        choice(
+          ...[
+            [null, [185, 180]],
+
+            ["*", [160, 165]],
+            ["/", [160, 165]],
+            ["^", [165, 160]],
+
+            ["+", [140, 145]],
+            ["-", [140, 145]],
+
+            ["|>", [50, 55]],
+            ["<|", [55, 50]],
+          ].map(([operator, [left, right]]) =>
+            (left > right ? prec.left : prec.right)(
+              Math.max(left, right),
+              seq(
+                field(
+                  "left_pattern",
+                  operator === null || operator === "<|"
+                    ? $.expression
+                    : $.pattern,
+                ),
+                ...operator !== null ? [field("operator", operator)] : [],
+                field(
+                  "right_pattern",
+                  operator === "|>" ? $.expression : $.pattern,
+                ),
+              ),
+            )
+          ),
+        ),
+      ),
+
+    pattern_identifier: ($) => prec(-1, $.identifier),
+    pattern_string: ($) => prec(-1, $.string),
+    pattern_number: ($) => prec(-1, $.number),
   },
 });

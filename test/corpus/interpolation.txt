@@ -1,0 +1,29 @@
+==========
+String interpolation
+==========
+
+"foo \(bar)"
+
+----------
+
+(source_code
+	(string
+		(content)
+		(interpolation
+			(identifier))))
+
+==========
+String multiline-interpolation
+==========
+
+"foo \(
+	bar
+)"
+
+----------
+
+(source_code
+	(string
+		(content)
+		(interpolation
+			(identifier))))

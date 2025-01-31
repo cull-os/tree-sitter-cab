@@ -1,4 +1,4 @@
-module github.com/cull-os/cab
+module github.com/cull-os/tree-sitter-cab
 
 go 1.22
 
