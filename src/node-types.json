@@ -400,13 +400,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "infix_operation",
-          "named": true
-        },
         {
           "type": "pattern",
           "named": true
@@ -433,7 +429,7 @@
     "type": "pattern_infix_operation",
     "named": true,
     "fields": {
-      "left_pattern": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
@@ -460,11 +456,23 @@
             "named": false
           },
           {
+            "type": ",",
+            "named": false
+          },
+          {
             "type": "-",
             "named": false
           },
           {
             "type": "/",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": ":=",
             "named": false
           },
           {
@@ -481,7 +489,7 @@
           }
         ]
       },
-      "right_pattern": {
+      "right": {
         "multiple": false,
         "required": true,
         "types": [
@@ -502,7 +510,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {

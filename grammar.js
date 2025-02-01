@@ -1,7 +1,3 @@
-const sepTrailing = (rule, separator) => seq(sep(rule, ","), optional(","));
-
-const sep = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
-
 export default grammar({
   name: "cab",
 
@@ -24,7 +20,7 @@ export default grammar({
   conflicts: ($) => [
     [$.pattern_list, $.list],
     [$.pattern_attribute_list, $.attribute_list],
-    [$.pattern_attribute_list, $.expression],
+    [$.pattern_infix_operation, $.infix_operation],
     [$.pattern_identifier, $.expression],
     [$.pattern_string, $.expression],
     [$.pattern_number, $.expression],
@@ -280,23 +276,14 @@ export default grammar({
     pattern_list: ($) =>
       seq(
         "[",
-        optional(sepTrailing(
-          $.pattern,
-          ",",
-        )),
+        optional($.pattern),
         "]",
       ),
 
     pattern_attribute_list: ($) =>
       seq(
         "{",
-        optional(sepTrailing(
-          choice(
-            $.pattern,
-            $.infix_operation,
-          ),
-          ",",
-        )),
+        optional($.pattern),
         "}",
       ),
 
@@ -312,22 +299,32 @@ export default grammar({
           ["+", [140, 145]],
           ["-", [140, 145]],
 
+          [":", [105, 100]],
+
           ["|>", [50, 55]],
           ["<|", [55, 50]],
+
+          // These two aren't really patterns but I'm just adding them here
+          // for convenience so that pattern_attribute_list doesn't become greedy.
+          [":=", [35, 30]],
+
+          [",", [25, 20]],
         ].map(([operator, [left, right]]) =>
           (left > right ? prec.left : prec.right)(
             Math.max(left, right),
             seq(
               field(
-                "left_pattern",
+                "left",
                 operator === null || operator === "<|"
                   ? $.expression
                   : $.pattern,
               ),
               ...operator !== null ? [field("operator", operator)] : [],
               field(
-                "right_pattern",
-                operator === "|>" ? $.expression : $.pattern,
+                "right",
+                operator === "|>" || operator === ":="
+                  ? $.expression
+                  : $.pattern,
               ),
             ),
           )
