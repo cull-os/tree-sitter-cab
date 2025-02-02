@@ -4,6 +4,12 @@ export default grammar({
   externals: ($) => [
     $.singleline_comment,
     $.multiline_comment,
+
+    $._repeated_string_start,
+    $._repeated_string_content,
+    $._repeated_string_end,
+
+    $._error_senitel,
   ],
 
   extras: ($) => [
@@ -203,14 +209,25 @@ export default grammar({
       ),
 
     string: ($) =>
-      seq(
-        alias('"', $.string_start),
-        repeat(choice(
-          $.interpolation,
-          alias(token.immediate(/\\[^(]/), $.escape),
-          alias(token.immediate(/[^\\"]+/), $.content),
-        )),
-        alias(token.immediate('"'), $.string_end),
+      choice(
+        seq(
+          alias('"', $.string_start),
+          repeat(choice(
+            $.interpolation,
+            alias(token.immediate(/\\[^(]/), $.escape),
+            alias(token.immediate(/[^\\"]+/), $.content),
+          )),
+          alias(token.immediate('"'), $.string_end),
+        ),
+        seq(
+          alias($._repeated_string_start, $.string_start),
+          repeat(choice(
+            $.interpolation,
+            alias(token.immediate(/\\[^(]/), $.escape),
+            alias($._repeated_string_content, $.content),
+          )),
+          alias($._repeated_string_end, $.string_end),
+        ),
       ),
 
     island: ($) =>
